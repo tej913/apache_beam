@@ -1,0 +1,73 @@
+1) Apache beam nstaklation and some basic implementation 
+
+2) Basics of GCP
+
+3) Basic coding related to apache beam
+
+4) Implementation of types of apache beam 
+
+5) Erros occured on GCP
+
+
+6) mutable_accumulator – the current accumulator, may be modified and returned for efficiency
+element – the element to add, should not be mutated
+*args – Additional arguments and side inputs.
+**kwargs – Additional arguments and side inputs.
+
+
+7) Pipeline
+ 
+
+    a) Create pipeline
+     
+    b) Pcollectipon
+    
+    c) Ptransform
+
+    d) GroupByKey
+
+    e) Map
+
+    f) Filter
+
+    g) Runner
+
+     h) Run pipeine
+
+8) 
+def filter_function(test=None):
+  # [START filter_function]
+  import apache_beam as beam
+
+  def is_perennial(plant):
+    return plant['duration'] == 'perennial'
+
+  with beam.Pipeline() as pipeline:
+    perennials = (
+        pipeline
+        | 'Gardening plants' >> beam.Create([
+            {
+                'icon': '??', 'name': 'Strawberry', 'duration': 'perennial'
+            },
+            {
+                'icon': '??', 'name': 'Carrot', 'duration': 'biennial'
+            },
+            {
+                'icon': '??', 'name': 'Eggplant', 'duration': 'perennial'
+            },
+            {
+                'icon': '??', 'name': 'Tomato', 'duration': 'annual'
+            },
+            {
+                'icon': '??', 'name': 'Potato', 'duration': 'perennial'
+            },
+        ])
+        | 'Filter perennials' >> beam.Filter(is_perennial)
+        | beam.Map(print))
+    # [END filter_function]
+    if test:
+      test(perennials)
+
+
+if __name__ == '__main__':
+   filter_function()
